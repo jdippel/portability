@@ -35,6 +35,6 @@ public class Chess383IOException extends Chess383Exception {
     public Chess383IOException( String message ) { super( message ); }
     
     public static void throwIOException( String message ) throws Chess383Exception {
-        throw new Chess383IOException( String.format( "reading file exception:", message ) );
+        throw new Chess383IOException( String.format( "reading file exception: %s", message ) );
     }
 }

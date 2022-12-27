@@ -22,6 +22,9 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.nio.file.FileSystems;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 import chess383.exception.Chess383IOException;
 
@@ -50,12 +53,12 @@ public class PortableGameNotation_IO {
     }
     
     static public PortableGameNotation_IO create( String incoming ) {
-        
+
         try {
             BufferedReader reader = new BufferedReader( new FileReader( incoming ) );
             return create( reader );
         } catch( FileNotFoundException e ) {
-            Chess383IOException.throwIOException( incoming );
+            Chess383IOException.throwIOException( Paths.get( incoming ).toAbsolutePath().toString() );
             return null;
         }
     }

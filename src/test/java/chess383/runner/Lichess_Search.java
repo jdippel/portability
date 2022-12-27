@@ -19,6 +19,7 @@
 package chess383.runner;
 
 import chess383.ICoordinateFactory;
+import chess383.exception.Chess383IOException;
 import chess383.notation.Next;
 import chess383.portability.PortableGameNotation;
 import chess383.portability.PortableGameNotation_Filter;
@@ -53,8 +54,15 @@ public class Lichess_Search {
         
         // final String ENCYCLOPEDIA = "lichess_first_1GB.pgn";
         final String ENCYCLOPEDIA = "lichess_2022-10.pgn";
-        
-        PortableGameNotation_IO input = PortableGameNotation_IO.create( "pgn/" +  ENCYCLOPEDIA);
+
+        PortableGameNotation_IO input;
+        try {
+            input = PortableGameNotation_IO.create("pgn/" + ENCYCLOPEDIA);
+        }
+        catch( Chess383IOException exception ) {
+            System.out.println( exception.getMessage() + " not found!" );
+            return;
+        }
         PortableGameNotation_POJO game;
         
         while( true ) {
